@@ -3,20 +3,18 @@
 # TODO : pick random df entries
 
 import sys
+import pandas as pd
 
 
-def txt_to_colon_separated(text_data):
-    """Takes text file, replaces spaces with ; as delimiter, returns list of all ingested lines"""
-    line_list = []
-    with open(
-        text_data,
-        encoding="utf8",
-    ) as fh:
+def txt_to_df(text_doc):
+    with open(text_doc, "r") as fh:
+        line_list = list()
         for line in fh:
+            #            c_line = ";".join(line.split(" "))
             c_line = ";".join(line.split())
             line_list.append(c_line)
     return line_list
 
 
 if __name__ == "__main__":
-    print(txt_to_colon_separated(sys.argv[1]))
+    print(txt_to_df(sys.argv[1]))
