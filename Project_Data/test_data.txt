@@ -1,0 +1,44 @@
+   (314) Rosalia                         1891 09 01  Nice                     Charlois, A.
+   (315) Constantia                      1891 09 04  Vienna                   Palisa, J.
+   (316) Goberta                         1891 09 08  Nice                     Charlois, A.
+   (317) Roxane                          1891 09 11  Nice                     Charlois, A.
+   (318) Magdalena                       1891 09 24  Nice                     Charlois, A.
+   (319) Leona                           1891 10 08  Nice                     Charlois, A.
+   (320) Katharina                       1891 10 11  Vienna                   Palisa, J.
+   (321) Florentina                      1891 10 15  Vienna                   Palisa, J.
+   (322) Phaeo                           1891 11 27  Marseilles               Borrelly, A.
+   (323) Brucia                          1891 12 22  Heidelberg               Wolf, M. F.
+   (324) Bamberga                        1892 02 25  Vienna                   Palisa, J.
+   (325) Heidelberga                     1892 03 04  Heidelberg               Wolf, M. F.
+   (326) Tamara                          1892 03 19  Vienna                   Palisa, J.
+   (327) Columbia                        1892 03 22  Nice                     Charlois, A.
+   (328) Gudrun                          1892 03 18  Heidelberg               Wolf, M. F.
+   (329) Svea                            1892 03 21  Heidelberg               Wolf, M. F.
+   (330) Adalberta           A910 CB     1910 02 02  Heidelberg               Wolf, M. F.
+   (331) Etheridgea                      1892 04 01  Nice                     Charlois, A.
+   (332) Siri                            1892 03 19  Heidelberg               Wolf, M. F.
+   (333) Badenia             1892 A      1892 08 22  Heidelberg               Wolf, M. F.
+   (334) Chicago             1892 L      1892 08 23  Heidelberg               Wolf, M. F.
+   (335) Roberta             1892 C      1892 09 01  Heidelberg               Staus, A.
+   (336) Lacadiera           1892 D      1892 09 19  Nice                     Charlois, A.
+   (337) Devosa              1892 E      1892 09 22  Nice                     Charlois, A.
+   (338) Budrosa             1892 F      1892 09 25  Nice                     Charlois, A.
+   (339) Dorothea            1892 G      1892 09 25  Heidelberg               Wolf, M. F.
+   (340) Eduarda             1892 H      1892 09 25  Heidelberg               Wolf, M. F.
+   (341) California          1892 J      1892 09 25  Heidelberg               Wolf, M. F.
+   (342) Endymion            1892 K      1892 10 17  Heidelberg               Wolf, M. F.
+   (343) Ostara              1892 N      1892 11 15  Heidelberg               Wolf, M. F.
+ (10272) Yuko                1981 EF13   1981 03 01  Siding Spring     103974 Bus, S. J.
+ (10273) Katvolk             1981 ED14   1981 03 01  Siding Spring     103974 Bus, S. J.
+ (10274) Larryevans          1981 ET15   1981 03 01  Siding Spring     103974 Bus, S. J.
+ (10275) Nathankaib          1981 EC16   1981 03 01  Siding Spring     103974 Bus, S. J.
+ (10276) Matney              1981 EK23   1981 03 03  Siding Spring     103974 Bus, S. J.
+ (10277) Micheli             1981 EC27   1981 03 02  Siding Spring     103974 Bus, S. J.
+ (10278) Virkki              1981 EW30   1981 03 02  Siding Spring     103974 Bus, S. J.
+ (10279) Rhiannonblaauw      1981 ET42   1981 03 02  Siding Spring     103974 Bus, S. J.
+ (10280) Yequanzhi           1981 EA43   1981 03 02  Siding Spring     103974 Bus, S. J.
+ (10281) Libourel            1981 EE45   1981 03 11  Siding Spring     103975 Bus, S. J.
+ (10282) Emilykramer         1981 ET46   1981 03 02  Siding Spring     103975 Bus, S. J.
+ (10283) Cromer              1981 JE2    1981 05 05  Palomar            41030 Shoemaker, C. S.
+ (10284) Damienlemay         1981 QY2    1981 08 24  La Silla                 Debehogne, H.
+ (10285) Renemichelsen       1982 QX1    1982 08 17  La Silla           54174 Lagerkvist, C.-I.
