@@ -41,6 +41,13 @@ else:
     print(f"Start migration")
 print('-------------------------------------')
 
+# logging counts
+asteroid_count = 0
+named_after_count = 0
+instance_count = 0
+subclass_count = 0
+row_number = 0
+
 # Start Iteration
 for i, row in df.iterrows():
 
@@ -54,6 +61,7 @@ for i, row in df.iterrows():
 
     if not pandas.isna(spk_id) or str(spk_id).strip() == "":
         insert_asteroid(cursor, row)
+        asteroid_count += 1
         current_asteroid_id = spk_id
 
     # print(f"row: {row_number}, asteroid_id_cache: {current_asteroid_id}")
@@ -68,13 +76,14 @@ for i, row in df.iterrows():
         description = row.get('Description named_after')
 
         # Check if already exists
-        cursor.execute("SELECT named_after_id FROM named_after WHERE name=? and description=?", (named_after, description))
+        cursor.execute("SELECT named_after_id FROM named_after WHERE name=?", (named_after,))
         result = cursor.fetchone()
 
         if result:
             current_named_after_id = result[0]
         else:
             current_named_after_id = insert_named_after(cursor, row, current_asteroid_id)
+            named_after_count += 1
 
     # print(f"row: {row_number}, named_after_id_cache: {current_named_after_id}")
 
@@ -98,6 +107,8 @@ for i, row in df.iterrows():
                 INSERT OR IGNORE INTO instances (label)
                 VALUES (?)
             """, (instance_of_named_after,))
+
+            instance_count += 1
 
             # get id after database insert
             current_instance_id = cursor.lastrowid
@@ -163,7 +174,7 @@ for i, row in df.iterrows():
                        INSERT OR IGNORE INTO subclasses (label)
                        VALUES (?)
                    """, (subclass_of_instance_of,))
-
+            subclass_count += 1
             subclass_id = cursor.lastrowid
 
         # update relationship table
@@ -178,4 +189,12 @@ for i, row in df.iterrows():
 
 conn.commit()
 conn.close()
+print('-------------------------------------')
 print("Data imported successfully.")
+print('-------------------------------------')
+print(f'Total rows processed: {row_number}')
+print(f'Number Asteroids: {asteroid_count}')
+print(f'Number Named After: {named_after_count}')
+print(f'Number Instances of Named After: {instance_count}')
+print(f'Number Subclasses of Instances: {subclass_count}')
+print('-------------------------------------')
