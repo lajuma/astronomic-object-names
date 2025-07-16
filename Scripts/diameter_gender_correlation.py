@@ -1,26 +1,66 @@
 import sqlite3
 import matplotlib.pyplot as plt
-import numpy as np
-from matplotlib.ticker import ScalarFormatter
+from statistics import median
 
+def create_boxplot(no_gender, female, male, fig_name):
 
-def create_histogram(male, female, trans):
-    plt.hist(
-        [male, female, trans],
-        bins=35,
-        color=['green', 'orange', 'blue'],
-        label=['Male', 'Female', 'Trans'],
-        alpha=0.6)
-    plt.title('Diameter Gender Distribution')
-    formatter = ScalarFormatter()
-    formatter.set_scientific(False)
-    plt.gca().yaxis.set_major_formatter(formatter)
-    plt.xlabel('Diameter')
-    plt.ylabel('Frequency (log)')
-    plt.yscale('log')
-    plt.tight_layout()
-    plt.savefig('../Figures/diameter_gender_distribution.png')
+    labels = ['male', 'female', 'no gender']
+    diameter_data = [male, female, no_gender]
+
+    # Plot
+    plt.figure(figsize=(8, 5))
+    plt.boxplot(diameter_data, tick_labels=labels)
+    plt.title("Diameter by Gender")
+    plt.xlabel("Gender")
+    plt.ylabel("Diameter (km)")
+    plt.grid(True)
+    plt.savefig(f'../Figures/{fig_name}.png')
     plt.close()
+
+def get_distributions(data):
+    d_no_gender = []
+    d_female = []
+    d_male = []
+    d_multiple_named_afters = []
+    d_multiple_sex_or_gender = []
+
+    for row in data:
+        diameter = float(row['diameter'])
+        # all non gendered asteroids
+        if row['sex_or_gender'] is None:
+            d_no_gender.append(diameter)
+        else:
+            sex_or_gender = str(row['sex_or_gender']).split(',')
+            # all asteroids with more than one entry in the sex and gender list
+            if len(sex_or_gender) > 1:
+                d_multiple_named_afters.append(sex_or_gender)
+            # females only
+            if 'female' in sex_or_gender and not 'male' in sex_or_gender:
+                d_female.append(diameter)
+            # males only
+            elif 'male' in sex_or_gender and not 'female' in sex_or_gender:
+                d_male.append(diameter)
+            # others (trans, female and male together etc.)
+            else:
+                d_multiple_sex_or_gender.append(diameter)
+    return d_no_gender, d_female, d_male, d_multiple_named_afters, d_multiple_sex_or_gender
+
+def print_results(no_gender, female, male, multiple_named_after, multiple_sexes):
+    print('-----------------------------')
+    print('Sex or Gender Distribution:')
+    print(f'females: {len(female)}')
+    print(f'males: {len(male)}')
+    print(f'no sex or gender: {len(no_gender)}')
+    print(f'multiple named after: {len(multiple_named_after)}')
+    print(f'multiple sexes or genders: {len(multiple_sexes)}')
+
+    print('-----------------------------')
+    print('Median of Distributions:')
+    print(f'median male: {median(male)}')
+    print(f'median female: {median(female)}')
+    print(f'median no gender: {median(no_gender)}')
+    print(f'median all: {median(male + female + no_gender + multiple_sexes)}')
+
 
 conn = sqlite3.connect("../Database/astronomic-objects.db")
 conn.row_factory = sqlite3.Row
@@ -28,40 +68,27 @@ cursor = conn.cursor()
 
 cursor.execute("""
 SELECT
-    a.name as asteroid_name,
-    n.name,
-    n.description,
-    a.diameter,
-	n.sex_or_gender
-FROM asteroids as a
-JOIN asteroids_named_after AS an ON a.spk_id = an.spk_id
-JOIN named_after AS n ON an.named_after_id = n.named_after_id
+    a.spk_id as spk_id,
+    a.diameter as diameter,
+    STRING_AGG(n.sex_or_gender, ',') AS sex_or_gender
+FROM asteroids AS a
+LEFT JOIN asteroids_named_after AS an ON a.spk_id = an.spk_id
+LEFT JOIN named_after AS n ON an.named_after_id = n.named_after_id
+GROUP BY a.spk_id, a.diameter
 ORDER BY a.diameter DESC;
 """)
 
 # Fetch results
 results = cursor.fetchall()
+results_100 = results[:100]
 
-diameters_male = []
-diameters_female = []
-diameters_trans_women = []
+diameters_no_gender, diameters_female, diameters_male, multiple_named_afters, multiple_sexes_or_other = get_distributions(results)
+diameters_no_gender_largest_100, diameters_female_largest_100, diameters_male_largest_100, multiple_named_afters_largest_100, multiple_sexes_or_other_largest_100 = get_distributions(results_100)
 
-for row in results:
-    if row['sex_or_gender'] == 'female' or row['sex_or_gender'] == 'female organism':
-        diameters_female.append(row['diameter'])
-    elif row['sex_or_gender'] == 'male' or row['sex_or_gender'] == 'male organism':
-        diameters_male.append(row['diameter'])
-    elif row['sex_or_gender'] == 'trans woman':
-        diameters_trans_women.append(row['diameter'])
+print_results(diameters_no_gender, diameters_female, diameters_male, multiple_named_afters, multiple_sexes_or_other)
+print_results(diameters_no_gender_largest_100, diameters_female_largest_100, diameters_male_largest_100, multiple_named_afters_largest_100, multiple_sexes_or_other_largest_100)
 
-
-# combined = np.concatenate([diameters_male, diameters_female, diameters_trans_women])
-# combined = combined[combined > 0]  # Remove non-positive values if any
-
-# bins = np.logspace(np.log10(min(combined[combined > 0])), np.log10(max(combined)), 50)
-
-# Create and save histogram for the first distribution
-create_histogram(diameters_male, diameters_female, diameters_trans_women)
+create_boxplot(diameters_no_gender, diameters_female, diameters_male, 'diameter_gender_boxplot')
 
 conn.commit()
 conn.close()
