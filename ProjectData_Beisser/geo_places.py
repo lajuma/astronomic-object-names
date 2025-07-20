@@ -1,6 +1,5 @@
 import sqlite3 as sql
 import pandas as pd
-from subcategories.py import import_data
 
 con = sql.connect("../Database/astronomic-objects.db")
 
@@ -15,6 +14,15 @@ FROM asteroids
 WHERE named_after.coordinates NOT NULL
 """)
 
+
+def read_data(query, con):
+    with con as connection:
+        results = pd.read_sql_query(query, con)
+    return results
+
+
 if __name__ == "__main__":
-    data = import_data(query, con)
-    print(data)
+    data = read_data(query, con)
+    data_noDuplicates = data.drop_duplicates(subset="name")
+    print(data_noDuplicates.to_string())
+    data_noDuplicates.to_csv("Figures/geo_places_noDuplicates.csv")
