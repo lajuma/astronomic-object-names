@@ -1,20 +1,22 @@
 # astronomic-object-names
 gender implications in astronomic object names, project for databases course
 
-## how to create and update the database
+## create and update the database by our scripts
 
-1. Run [`create_schema.py`](ProjectData_Massar/Scripts/create_schema.py)
+1. Run [create_schema.py](ProjectData_Massar/Scripts/create_schema.py)
     This will create the empty database.
 
-2. Run [`migrate_asteroid_data.py`](ProjectData_Massar/Scripts/migrate_asteroid_data.py)
+2. Run [migrate_asteroid_data.py](ProjectData_Massar/Scripts/migrate_asteroid_data.py)
     Make sure to have the right paths (config section, lines 7–10).  
     This will migrate all (or parts of) the data from the TSV file into the database and will take about half a minute.
 
 3. The SQL database is created into `Database/astronomic-objects.db`.
 
+Otherwise, you find the database dump in [Database/astronomic-objects-dump.sql](Database/astronomic-objects-dump.sql)
+
 ## how our data is organized
 
-The raw project data files (tsv) can be found in the folder [`Project Data`](Project_Data).
+The raw project data files (tsv) can be found in the folder [Project Data](Project_Data).
 
 Our contributions can be found in the respective subfolders with our names. The subfolders are organized into:
 
