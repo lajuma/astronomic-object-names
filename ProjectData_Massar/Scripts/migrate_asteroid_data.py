@@ -6,8 +6,8 @@ from reset_database import clear_database
 
 # Config (adapt for testing)
 number_of_rows_to_process = 0 # turn to 0 for all rows
-path_to_tsv_file = "../Project_Data/asteroids_17k_OpenRefine_Export.tsv"
-path_to_sql_file = "../Database/astronomic-objects.db"
+path_to_tsv_file = "../../Project_Data/asteroids_17k_OpenRefine_Export.tsv"
+path_to_sql_file = "../../Database/astronomic-objects.db"
 
 # Load TSV into DataFrame
 df = pandas.read_csv(
@@ -31,9 +31,6 @@ print('-------------------------------------')
 current_asteroid_id = None
 current_named_after_id = None
 current_instance_id = None
-
-# TODO: add error logging for each row (try/except)
-# TODO: refactor instances, categories, subclasses to function in insert_to_database
 
 if number_of_rows_to_process > 0:
     print(f"Start migration of first {number_of_rows_to_process} rows")

@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect("../Database/astronomic-objects.db")
+conn = sqlite3.connect("../../Database/astronomic-objects.db")
 cursor = conn.cursor()
 
 # ------------------------------------------------------------------------------------------------

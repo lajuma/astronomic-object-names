@@ -62,7 +62,7 @@ def print_results(no_gender, female, male, multiple_named_after, multiple_sexes)
     print(f'median all: {median(male + female + no_gender + multiple_sexes)}')
 
 
-conn = sqlite3.connect("../Database/astronomic-objects.db")
+conn = sqlite3.connect("../../Database/astronomic-objects.db")
 conn.row_factory = sqlite3.Row
 cursor = conn.cursor()
 
