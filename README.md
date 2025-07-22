@@ -23,6 +23,6 @@ Our contributions can be found in the respective subfolders with our names. The 
 1. `Queries`  
     The SQL queries, that we used for data interpretation. You might want to run them in `DB Browser for sqlite` on the above created database.
 2. `Figures`  
-    The Diagrams created by using Python and Matplotlib
+    The Diagrams created by using Python, Matplotlib, as well as QGIS and LibreOffice Calc
 3. `Scripts`  
     The Scripts we used for database creation, migration, statistical evaluations and visualizations
